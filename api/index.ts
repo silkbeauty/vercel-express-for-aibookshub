@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const { sql } = require('@vercel/postgres');
 
+const cors = require('cors');
+
 const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -15,6 +17,7 @@ const userRouter = require('./routes/user.route');
 
 // 1. app
 const app = express();
+app.use(cors());
 app.use(express.static('public'));
 
 // 2. routes
