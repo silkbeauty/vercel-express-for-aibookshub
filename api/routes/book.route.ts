@@ -7,6 +7,16 @@ router.get('/', (req, res) => {
     res.json({ name: 'aibookshub', website: 'https://aibookshub.com' });
 });
 
+router.get('/list', async (req, res) => {
+    try {
+        const result   = await sql`SELECT json_agg(books) AS books FROM books;`;
+        res.json(result.rows[0].books);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error retrieving categories' });
+    }
+});
+
 router.get('/side', async (req, res) => {
     try {
         // Fetch all categories from the database
