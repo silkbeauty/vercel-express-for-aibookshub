@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.get('/list', async (req, res) => {
     try {
-        const result   = await sql`SELECT json_agg(books) AS books FROM books;`;
+        const result   = await sql`SELECT json_agg(books ORDER BY language_code) AS books FROM books;`;
         res.json(result.rows[0].books);
     } catch (error) {
         console.error(error);
